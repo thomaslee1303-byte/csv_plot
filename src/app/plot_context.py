@@ -157,7 +157,12 @@ class PlotContext:
         self._services.layout_manager.request_mark_stats_refresh(immediate=immediate)
 
     def announce_cleared(self, label: str, curves: int) -> None:
-        """子图级清除的播报落点（右键菜单 / 双击中键共用）。"""
+        """子图级清除的播报落点（右键菜单 / 双击中键共用）。
+
+        标注条数由 ``label`` 承载（``已清除绘图与 N 条标注``），不另开参数：
+        这个签名是既有测试直接替换的接缝（见 test_clear_plot_feedback 里的
+        替身 lambda），加参数会把它打断。
+        """
         self._services._announce_cleared_plots(label, curves)
 
     def toggle_cursor_all(self, enabled: bool) -> None:
